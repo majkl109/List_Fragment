@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 
 /**
@@ -37,10 +39,16 @@ public class FragmentA extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_a, container, false);
         lv = view.findViewById(R.id.idListView);
-        adapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,mockData);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mockData);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), "Clicked " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
 
 
-
+    }
 }
